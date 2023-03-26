@@ -20,7 +20,9 @@ const trending = await youtube.getTrending();
 
 const now = await trending.getTabByName("Music");
 for (let i = 0; i < now.videos.length; i++) {
-  const info = await youtube.getBasicInfo(now.videos[i].id).catch((e) => undefined);
+  const info = await youtube
+    .getBasicInfo(now.videos[i].id)
+    .catch((e) => undefined);
 
   const format = info.chooseFormat({ type: "video+audio", quality: "best" });
   let url = format?.decipher(youtube.session.player);
@@ -37,7 +39,7 @@ for (let i = 0; i < now.videos.length; i++) {
 // Thumbnails can be obtained using best_thumbnail.
 
 app.get("/", (req, res) => {
-  res.render("index", { data,youtube });
+  res.render("index", { data, youtube });
 });
 
 app.post("/", (req, res) => {
@@ -52,8 +54,7 @@ app.post("/", (req, res) => {
           continue;
         }
         if (d.videos[i] instanceof YTNodes.Video) {
-          const url = (await youtube.getStreamingData(now.videos[i].id))
-            .url;
+          const url = (await youtube.getStreamingData(now.videos[i].id)).url;
           now.videos[i].streamURL = url;
           data.push(d.videos[i]);
         }
@@ -83,26 +84,26 @@ app.get("/play/:id", (req, res) => {
       res.send("error");
     });
 });
+// Future Ideas
+// app.get("/download/:id", async (req, res) => {
+//   const { id } = req.params;
+//   const options = {
+//     type: "audio",
+//     quality: "best",
+//     format: "mp4",
+//   };
+//   let name;
+//   const info = await youtube.getBasicInfo(id).catch(e => undefined);
+//   if (!info) return;
 
-app.get("/download/:id", async (req, res) => {
-  const { id } = req.params;
-  const options = {
-    type: "audio",
-    quality: "best",
-    format: "mp4",
-  };
-  let name;
-  const info = await youtube.getBasicInfo(id).catch(e => undefined);
-  if (!info) return;
-
-  const format = info.chooseFormat({ type: "video+audio", quality: "best" });
-  let url = format?.decipher(youtube.session.player);
-  console.log(info.basic_info.title)
-  console.log(url)
-  const fetchData = await fetch(url).then(d => d.blob());
-  url = URL.createObjectURL(new Blob([fetchData]));
-  res.render("download",{url:url,info:info.basic_info})
-});
+//   const format = info.chooseFormat({ type: "video+audio", quality: "best" });
+//   let url = format?.decipher(youtube.session.player);
+//   console.log(info.basic_info.title)
+//   console.log(url)
+//   const fetchData = await fetch(url).then(d => d.blob());
+//   url = URL.createObjectURL(new Blob([fetchData]));
+//   res.render("download",{url:url,info:info.basic_info})
+// });
 
 app.listen(process.env.PORT || 44444, (e) => {
   if (e) throw e;
