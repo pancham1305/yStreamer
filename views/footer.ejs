@@ -1,0 +1,16 @@
+<script src="../particles/tsparticles.engine.min.js"></script>
+<script src="../particles/tsparticles.move.base.min.js"></script>
+<script src="../particles/tsparticles.present.snow.min.js"></script>
+<script src="../particles/tsparticles.shape.circle.min.js"></script>
+<script src="../particles/tsparticles.updater.color.min.js"></script>
+<script src="../particles/tsparticles.updater.opacity.min.js"></script>
+<script src="../particles/tsparticles.updater.out-modes.min.js"></script>
+<script src="../particles/tsparticles.updater.size.min.js"></script>
+<script src="../particles/tsparticles.updater.wobble.min.js"></script>
+<script>
+  (async () => {
+    await loadSnowPreset(tsParticles);
+
+    await tsParticles.load("tsparticles", { preset: "snow" });
+  })();
+</script>

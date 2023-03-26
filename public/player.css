@@ -1,0 +1,86 @@
+/*
+slider properties:
+--vm-slider-track-color: 
+--vm-slider-track-height: 
+--vm-slider-track-focused-height:
+Player general Properties:
+
+--vm-player-bg:
+Player Control Menu Properties:
+
+--vm-controls-bg:
+--vm-control-color: 
+--vm-control-focus-color: red;
+
+Time Style
+--vm-time-color: red;
+
+Inner Menu styling:
+-vm-menu-bg: red;
+--vm-menu-font-size: 8px;
+--vm-menu-font-weight: 400;
+--vm-menu-transition: transform 0.25s ease-out;
+--vm-menu-item-padding: 8px;
+--vm-menu-item-focus-color: var(--vm-menu-color);
+--vm-menu-item-focus-bg: var(--vm-color-white-100);
+--vm-menu-item-tap-highlight: var(--vm-color-white-100);
+--vm-menu-item-hint-color: var(--vm-menu-color);
+--vm-menu-item-hint-font-size: 13px;
+--vm-menu-item-hint-opacity: 0.54;
+
+
+--vm-menu-item-badge-color: var(--vm-menu-color);
+--vm-menu-item-badge-bg: transparent;
+--vm-menu-item-badge-font-size: 10px;
+--vm-menu-item-arrow-color: var(--vm-menu-color);
+--vm-menu-item-check-icon-size: 16px;
+--vm-menu-item-divider-color: var(--vm-color-white-100);
+
+
+
+*/
+
+#play {
+  display: flex;
+  justify-content: center;
+  width: 49vw;
+}
+
+/* vm-player {
+  --vm-slider-track-height: 10px;
+  --vm-slider-track-focused-height: 10px;
+  --vm-player-bg: rgb(51, 51, 51);
+} */
+
+h2 {
+  display: flex;
+  justify-content: center;
+  margin-top: revert;
+  color: azure;
+}
+
+video {
+  display: block;
+}
+#tsparticles {
+  position: absolute;
+  z-index: -1;
+}
+#videoContainer {
+  height: 444px;
+}
+@media screen and (max-width: 728px) {
+  video {
+    width: inherit;
+    height: min-content;
+  }
+
+  h2 {
+    position: unset;
+    padding-top: 27px;
+  }
+
+  #videoContainer {
+    height: 273px;
+  }
+}
