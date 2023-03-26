@@ -91,6 +91,6 @@ app.get("/download/:id", (req, res) => {
   });
 });
 
-app.listen(44444, (e) => {
+app.listen(process.env.PORT||44444, (e) => {
   if (e) throw e;
 });
