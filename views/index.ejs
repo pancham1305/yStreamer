@@ -39,8 +39,8 @@
             <a href="/play/<%= i.id %>"
               ><span class="material-symbols-outlined"> play_arrow </span></a
             >
-            <a href="<%=i.streamURL%>"
-              ><span class="material-symbols-outlined"> download </span></a
+            <button  onclick="download(`<%= i.streamURL %>`); return false;"
+              ><span class="material-symbols-outlined"> download </span></button
             >
           </div>
         </div>
@@ -53,7 +53,7 @@
       integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
       crossorigin="anonymous"
     ></script>
-
+    <script src="download.js"></script>
     <script defer src="app.js"></script>
     <%- include('footer.ejs') %>
   </body>
