@@ -15,27 +15,7 @@ const youtube = await Innertube.create();
 // const tabs = trending.tabs;
 const trending = await youtube.getHomeFeed();
 const now = trending.contents.contents;
-// console.log(now);
 
-// for (let i = 0; i < now.videos.length; i++) {
-//   const info = await youtube
-//     .getBasicInfo(now.videos[i].id)
-//     .catch((e) => undefined);
-
-//   const format = info.chooseFormat({ type: "video+audio", quality: "best" });
-//   let url = format?.decipher(youtube.session.player);
-//   now.videos[i].streamURL = url;
-//   // console.log({ url });
-
-//   data.push(now.videos[i]);
-//   // console.log(now.videos[i].id);
-//   if (i >= 11) {
-//     break;
-//   }
-// }
-
-// Thumbnails can be obtained using best_thumbnail.
-// for (let i = 0; i < now.length; i++) {
 console.log(now[0].type);
 // }
 app.get("/", (req, res) => {
@@ -80,27 +60,7 @@ app.post("/", (req, res) => {
         res.send("error");
       });
   });
-  // Future Ideas
-  // app.get("/download/:id", async (req, res) => {
-  //   const { id } = req.params;
-  //   const options = {
-  //     type: "audio",
-  //     quality: "best",
-  //     format: "mp4",
-  //   };
-  //   let name;
-  //   const info = await youtube.getBasicInfo(id).catch(e => undefined);
-  //   if (!info) return;
-
-  //   const format = info.chooseFormat({ type: "video+audio", quality: "best" });
-  //   let url = format?.decipher(youtube.session.player);
-  //   console.log(info.basic_info.title)
-  //   console.log(url)
-  //   const fetchData = await fetch(url).then(d => d.blob());
-  //   url = URL.createObjectURL(new Blob([fetchData]));
-  //   res.render("download",{url:url,info:info.basic_info})
-  // });
-
+  
   app.listen(process.env.PORT || 44444, (e) => {
     if (e) throw e;
   });
