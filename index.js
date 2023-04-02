@@ -7,39 +7,39 @@ const app = express();
 app.use(express.static(join(process.cwd(), "public")));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use((req, res, next) => {
-  res.append("Access-Control-Allow-Origin", ["*"]);
-  next();
-});
 app.set("view engine", "ejs");
 app.set("views", join(process.cwd(), "views"));
-let data = [];
+
 const youtube = await Innertube.create();
-const trending = await youtube.getTrending();
+// const trending = await youtube.getTrending();
 // const tabs = trending.tabs;
+const trending = await youtube.getHomeFeed();
+const now = trending.contents.contents;
+// console.log(now);
 
-const now = await trending.getTabByName("Music");
-for (let i = 0; i < now.videos.length; i++) {
-  const info = await youtube
-    .getBasicInfo(now.videos[i].id)
-    .catch((e) => undefined);
+// for (let i = 0; i < now.videos.length; i++) {
+//   const info = await youtube
+//     .getBasicInfo(now.videos[i].id)
+//     .catch((e) => undefined);
 
-  const format = info.chooseFormat({ type: "video+audio", quality: "best" });
-  let url = format?.decipher(youtube.session.player);
-  now.videos[i].streamURL = url;
-  // console.log({ url });
+//   const format = info.chooseFormat({ type: "video+audio", quality: "best" });
+//   let url = format?.decipher(youtube.session.player);
+//   now.videos[i].streamURL = url;
+//   // console.log({ url });
 
-  data.push(now.videos[i]);
-  // console.log(now.videos[i].id);
-  if (i >= 11) {
-    break;
-  }
-}
+//   data.push(now.videos[i]);
+//   // console.log(now.videos[i].id);
+//   if (i >= 11) {
+//     break;
+//   }
+// }
 
 // Thumbnails can be obtained using best_thumbnail.
-
+// for (let i = 0; i < now.length; i++) {
+console.log(now[0].type);
+// }
 app.get("/", (req, res) => {
-  res.render("index", { data, youtube });
+  res.render("index", { now });
 });
 
 app.post("/", (req, res) => {
