@@ -25,7 +25,10 @@
     <div class="videos">
       <div class="video">
         <% for (let i of data) {%>
-        <div class="card hidden">
+        <div
+          onclick="window.location.href=`/play/<%=i.id%>`"
+          class="card hidden"
+        >
           <img
             class="card-img-top"
             src="<%=i.best_thumbnail.url%>"

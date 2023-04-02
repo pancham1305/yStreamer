@@ -41,24 +41,20 @@ console.log(now[0].type);
 app.get("/", (req, res) => {
   res.render("index", { now });
 });
-
 app.post("/", (req, res) => {
   const data = [];
   const { query } = req.body;
   let i = 0;
   youtube
     .search(query)
-    .then(async (d) => {
+    .then((d) => {
       for (i = 0; i < d.videos.length; i++) {
         if (!d.videos[i].best_thumbnail) {
           continue;
         }
-        if (d.videos[i] instanceof YTNodes.Video) {
-          const url = (await youtube.getStreamingData(now.videos[i].id)).url;
-          now.videos[i].streamURL = url;
-          data.push(d.videos[i]);
-        }
+        data.push(d.videos[i]);
       }
+      
       res.render("search", { data });
     })
     .catch((e) => {
@@ -66,45 +62,46 @@ app.post("/", (req, res) => {
       res.render("search", { data });
     });
 });
-app.get("/play/:id", (req, res) => {
-  const { id } = req.params;
+  app.get("/play/:id", (req, res) => {
+    const { id } = req.params;
 
-  const info = youtube
-    .getBasicInfo(id)
-    .then((e) => {
-      // console.log(e);
-      const format = e.chooseFormat({ type: "video+audio", quality: "best" });
-      const url = format?.decipher(youtube.session.player);
-      const base = e.basic_info;
+    const info = youtube
+      .getBasicInfo(id)
+      .then((e) => {
+        // console.log(e);
+        const format = e.chooseFormat({ type: "video+audio", quality: "best" });
+        const url = format?.decipher(youtube.session.player);
+        const base = e.basic_info;
 
-      res.render("player", { url, base });
-    })
-    .catch((e) => {
-      // console.log(e);
-      res.send("error");
-    });
-});
-// Future Ideas
-// app.get("/download/:id", async (req, res) => {
-//   const { id } = req.params;
-//   const options = {
-//     type: "audio",
-//     quality: "best",
-//     format: "mp4",
-//   };
-//   let name;
-//   const info = await youtube.getBasicInfo(id).catch(e => undefined);
-//   if (!info) return;
+        res.render("player", { url, base });
+      })
+      .catch((e) => {
+        // console.log(e);
+        res.send("error");
+      });
+  });
+  // Future Ideas
+  // app.get("/download/:id", async (req, res) => {
+  //   const { id } = req.params;
+  //   const options = {
+  //     type: "audio",
+  //     quality: "best",
+  //     format: "mp4",
+  //   };
+  //   let name;
+  //   const info = await youtube.getBasicInfo(id).catch(e => undefined);
+  //   if (!info) return;
 
-//   const format = info.chooseFormat({ type: "video+audio", quality: "best" });
-//   let url = format?.decipher(youtube.session.player);
-//   console.log(info.basic_info.title)
-//   console.log(url)
-//   const fetchData = await fetch(url).then(d => d.blob());
-//   url = URL.createObjectURL(new Blob([fetchData]));
-//   res.render("download",{url:url,info:info.basic_info})
-// });
+  //   const format = info.chooseFormat({ type: "video+audio", quality: "best" });
+  //   let url = format?.decipher(youtube.session.player);
+  //   console.log(info.basic_info.title)
+  //   console.log(url)
+  //   const fetchData = await fetch(url).then(d => d.blob());
+  //   url = URL.createObjectURL(new Blob([fetchData]));
+  //   res.render("download",{url:url,info:info.basic_info})
+  // });
 
-app.listen(process.env.PORT || 44444, (e) => {
-  if (e) throw e;
-});
+  app.listen(process.env.PORT || 44444, (e) => {
+    if (e) throw e;
+  });
+
