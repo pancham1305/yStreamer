@@ -163,13 +163,10 @@ input[type="range"]::-webkit-slider-thumb {
     padding-top: 27px;
   }
   #my-video {
-    width: 75% !important;
+    width: 100% !important;
     height: 75% !important;
   }
 
-  /*   #videoContainer {
-    height: 273px;
-  } */
 }
 #video {
   display: flex;
