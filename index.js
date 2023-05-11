@@ -13,11 +13,40 @@ app.set("views", join(process.cwd(), "views"));
 const youtube = await Innertube.create();
 // const trending = await youtube.getTrending();
 // const tabs = trending.tabs;
-const trending = await youtube.getHomeFeed();
-const now = trending.contents.contents;
+// const trending = await youtube.getHomeFeed();
+// const now = trending.contents.contents;
 
-console.log(now[0].type);
+// console.log(now[0].type);
 // }
+
+let data = [];
+const trending = await youtube.getTrending();
+// const tabs = trending.tabs;
+
+const now = await trending.getTabByName("Now");
+for (let i = 0; i < now.videos.length; i++) {
+  const info = await youtube
+    .getBasicInfo(now.videos[i].id)
+    .catch((e) => undefined);
+
+  const format = info.chooseFormat({ type: "video+audio", quality: "best" });
+  let url = format?.decipher(youtube.session.player);
+  now.videos[i].streamURL = url;
+  // console.log({ url });
+
+  data.push(now.videos[i]);
+  // console.log(now.videos[i].id);
+  if (i >= 11) {
+    break;
+  }
+}
+
+// Thumbnails can be obtained using best_thumbnail.
+
+app.get("/", (req, res) => {
+  res.render("index", { data, youtube });
+});
+
 app.get("/", (req, res) => {
   res.render("index", { now });
 });

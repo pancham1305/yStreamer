@@ -25,21 +25,18 @@
 
     <div class="videos">
       <div class="video">
-        <% for (let i=0; i<now.length;i++) {%>
-          <% if(now[i].type!='RichItem') {%>
-            <% continue; %>
-            <% } %>
+        <% for (let i of data) {%>
         <div
-          onclick="window.location.href=`/play/<%=now[i].content.id%>`"
+          onclick="window.location.href=`/play/<%=i.id%>`"
           class="card hidden"
         >
           <img
             class="card-img-top"
-            src="<%=now[i].content.thumbnails[0].url%>"
+            src="<%=i.best_thumbnail.url%>"
             alt="Card image cap"
           />
           <div class="card-body">
-            <p class="card-text"><%= now[i].content.title.text %></p>
+            <p class="card-text"><%= i.title.text %></p>
           </div>
         </div>
         <% } %>
