@@ -1,8 +1,8 @@
 {
     "name": "yStreamer",
     "short_name": "yStreamer",
-    "theme_color": "rgba(33,150,243,0.86)",
-    "background_color": "#2196f3",
+    "theme_color": "#EEF5DB",
+    "background_color": "#EEF5DB",
     "display": "fullscreen",
     "orientation": "portrait",
     "scope": "/",
