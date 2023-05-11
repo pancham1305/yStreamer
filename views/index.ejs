@@ -37,6 +37,8 @@
           />
           <div class="card-body">
             <p class="card-text"><%= i.title.text %></p>
+            <p>By <%=i.author.name%></p>
+            <p><%=i.published.text%> || <%=i.view_count.text%></p>
           </div>
         </div>
         <% } %>

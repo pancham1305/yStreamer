@@ -33,14 +33,13 @@ for (let i = 0; i < now.videos.length; i++) {
   let url = format?.decipher(youtube.session.player);
   now.videos[i].streamURL = url;
   // console.log({ url });
-
   data.push(now.videos[i]);
   // console.log(now.videos[i].id);
   if (i >= 11) {
     break;
   }
 }
-
+// console.log(data[0]);
 // Thumbnails can be obtained using best_thumbnail.
 
 app.get("/", (req, res) => {
@@ -61,9 +60,10 @@ app.post("/", (req, res) => {
         if (!d.videos[i].best_thumbnail) {
           continue;
         }
+
         data.push(d.videos[i]);
       }
-
+      console.log(data[0]);
       res.render("search", { data });
     })
     .catch((e) => {
