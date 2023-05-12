@@ -63,11 +63,11 @@ app.post("/", (req, res) => {
 
         data.push(d.videos[i]);
       }
-      console.log(data[0]);
+      // console.log(data[0]);
       res.render("search", { data });
     })
     .catch((e) => {
-      console.log(e);
+      // console.log(e);
       res.render("search", { data });
     });
 });
