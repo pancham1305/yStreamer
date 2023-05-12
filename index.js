@@ -41,7 +41,7 @@ for (let i = 0; i < now.videos.length; i++) {
 }
 // console.log(data[0]);
 // Thumbnails can be obtained using best_thumbnail.
-
+// console.log(data[0]);
 app.get("/", (req, res) => {
   res.render("index", { data, youtube });
 });
