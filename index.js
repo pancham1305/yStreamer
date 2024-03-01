@@ -93,6 +93,6 @@ app.get("/play/:id", (req, res) => {
     });
 });
 
-app.listen(process.env.PORT || 44444, (e) => {
+app.listen(process.env.PORT || 3000, (e) => {
   if (e) throw e;
 });
